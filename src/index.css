@@ -1,0 +1,542 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+body {
+  margin: 0;
+  background: #2a292c; 
+  color: var(--text); 
+}
+
+#root {
+  /* Forzamos a que el contenedor de React ocupe todo el ancho real de la pantalla */
+  width: 100%;
+  max-width: 100% !important;
+  margin: 0 !important;
+  text-align: left !important; /* Los textos e iconos vuelven a alinearse a la izquierda */
+  min-height: 100vh;
+  
+  /* Flexbox en fila: Header a la izquierda, Main a la derecha */
+  display: flex;
+  flex-direction: row; 
+  box-sizing: border-box;
+   --sideBGcolor: #070707 ;
+  /* --themeColor: #3dc4fe ; */
+  /* --themeColor: #b92410 ; */
+  --themeColor: #b97d10 ;
+  --iconBGcolor: #2c2f3f;
+  --textColor: #747272;
+  --bgcolor: #f7f7f7;
+}
+
+/* El contenedor del contenido al lado del menú */
+.main-content {
+  flex: 1;
+  margin-left: 300px; /* Crea el colchón exacto de 300px para no pisar el menú fixed */
+  min-height: 100vh;
+  background: var(--bg);
+  transition: 0.5s;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ==========================================================================
+   SECCIÓN HOME ADAPTADA (Adiós desplazamientos negativos y caídas)
+   ========================================================================== */
+#home {
+  width: 100%;
+  min-height: 100vh;
+  /* Cambiamos a 'cover' para que la imagen cubra toda la sección como un tapiz */
+  background: url('imagenes/nuevo1.png');
+  background-size: contain;
+  background-position: right;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  
+  /* Centrado interno fluido con Flexbox */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start; 
+  padding: 0 80px; /* Separación para que las letras no peguen con el menú */
+  position: relative;
+  z-index: 1;
+}
+
+#home::before {
+  content: '';
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.431);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1; /* Forzamos a la capa oscura a quedarse DETRÁS del texto */
+}
+
+.home-row {
+  z-index: 2; /* Texto por sobre la capa oscura */
+}
+
+#home .home-row h1 {
+  font-size: 60px;
+  color: #f7f7f7;
+  font-weight: 600;
+  letter-spacing: -1px;
+  margin-bottom: 10px;
+  line-height: 70px;
+  position: relative;
+  /* SE ELIMINARON right: 370px y bottom: 150px que causaban que se fuera abajo */
+}
+
+#home .home-row h1 span {
+  color: var(--themeColor);
+}
+
+#home .home-row p {
+  font-size: 30px;
+  color: var(--bgcolor);
+  font-weight: 500;
+  position: relative;
+  /* SE ELIMINARON right y bottom fijos */
+}
+
+#home .home-row p span {
+  border-bottom: 4px solid var(--themeColor);
+}
+
+/* ==========================================================================
+   RESPONSIVE GLOBAL OPTIMIZADO PARA MÓVILES
+   ========================================================================== */
+@media (max-width: 1050px) {
+  #root {
+    flex-direction: column; /* En celulares el flujo pasa a ser vertical */
+  }
+  .main-content {
+    margin-left: 0; /* Eliminamos el espacio del menú ya que pasa a modo oculto */
+    width: 100%;
+  }
+  #home {
+    padding: 0 30px;
+    align-items: center; /* Centramos el texto en las pantallas de teléfono */
+  }
+  .home-row {
+    text-align: center;
+  }
+}
+/* ==========================================================================
+   ESTILOS COMPLETOS PARA EL MENÚ LATERAL (HEADER)
+   ========================================================================== */
+
+header {
+  width: 300px;
+  height: 100vh;
+  padding: 30px 25px;
+  background-color: #08060d; /* Fondo oscuro elegante para el menú */
+  overflow-y: auto;
+  position: fixed; /* Lo clava a la izquierda y no se mueve con el scroll */
+  left: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 99999 !important; /* Pasa por encima de la imagen de fondo */
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+/* --- Foto de Perfil y Nombre --- */
+header .perfil {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+header .perfil img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+ border: 6px solid var(--themeColor, #ffb703); /* Círculo de fondo para la foto */
+  object-fit: cover;
+  margin-bottom: 15px;
+}
+
+header .perfil h1 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #f7f7f7 !important;
+  margin: 0 0 15px 0;
+  letter-spacing: 0.5px;
+}
+
+/* --- Redes Sociales dentro del Menú --- */
+header .perfil .redes {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+header .perfil .redes a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: #1f1a29;
+  color: #f7f7f7;
+  border-radius: 50%;
+  text-decoration: none;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+header .perfil .redes a:hover {
+  background: var(--accent, #b97d10); 
+  color: #fff;
+}
+
+/* --- Lista de Navegación (Navbar) --- */
+header .navbar {
+  margin-top: 15px;
+}
+
+header .navbar ul {
+  list-style: none; /* Quitamos los puntitos azules molestos */
+  padding: 0;
+  margin: 0;
+}
+
+header .navbar ul li {
+  padding: 12px 0;
+  position: relative;
+}
+
+header .navbar ul li a {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Separa el icono de React-Icons del texto */
+  color: #a8a3b3; /* Gris claro para los enlaces */
+  text-decoration: none; /* Quita el subrayado azul de los enlaces */
+  font-size: 16px;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+/* Estilo para los iconos de React-Icons */
+header .navbar ul li a svg {
+  font-size: 18px;
+  color: #a8a3b3;
+  transition: 0.3s;
+}
+
+/* --- Efectos Hover y Link Activo --- */
+header .navbar ul li a:hover,
+header .navbar ul li a.active {
+  color: #fff; /* El texto se ilumina en blanco */
+}
+
+header .navbar ul li a:hover svg,
+header .navbar ul li a.active svg {
+  color: var(--accent, #b97d10); /* El icono se vuelve morado */
+}
+
+/* --- Botón de Menú Móvil (Oculto en PC) --- */
+#menubtn {
+  position: fixed;
+  right: 15px;
+  top: 15px;
+  font-size: 24px;
+  width: 40px;
+  height: 40px;
+  background-color: var(--accent, #b97d10);
+  color: #fff;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 100000 !important;
+  display: none; /* Se oculta por defecto en computadores */
+}
+
+/* --- Ajuste Responsive para Pantallas Pequeñas --- */
+@media only screen and (max-width: 1050px) {
+  header {
+    left: -300px; /* Esconde el menú en celulares */
+    transition: 0.5s;
+  }
+  
+  #menubtn {
+    display: inline-flex; /* Aparece el botón de hamburguesa en celulares */
+  }
+  
+  /* Clase que activa React al presionar el botón en el celular */
+  body.mobile-nav-active header {
+    left: 0;
+  }
+}
+
+/*-------about section--------*/
+#about{
+    padding: 70px 30px;
+  
+}
+.heading{
+    color: var(--themeColor);
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+.divider{
+  width: 120px;
+  height: 4px;
+  background-color: var(--themeColor);
+  border-radius: 3px;
+}
+#about .parraf{
+  color: #f7f7f7;
+  font-size: 17px;
+  letter-spacing: 0.4;
+  font-weight: 400;
+  margin-top: 15px;
+}
+#about .about-col{
+  display: flex;
+  gap: 5px;
+  margin-top: 30px;
+
+}
+#about .about-col .img-col{
+  flex-basis: 60%;
+  text-align: center;
+}
+#about .about-col .img-col img{
+  width: 100%;
+  transition: 0.5s;
+}
+#about.about-col .info-col{
+  flex-basis: 40%;
+  text-align: right;
+}
+#about .about-col .info-col h2{
+  color: var(--themeColor);
+  font-weight: 700;
+  font-size: 35px;
+  letter-spacing: 0.5px;
+  margin-top: -10px;
+  margin-left: 350px;
+}
+#about .about-col .info-col p{
+  color: var(--bgcolor);
+  font-size: 18px;
+  letter-spacing: 0.5px;
+  font-style: italic;
+  margin-left: 150px;
+  position: relative;
+  top: 20px;
+}
+#about .about-col .info-col .icon-list-col{
+  display: flex;
+  margin-top: 20px;
+  gap: 40px;
+  margin-left:150px;
+  position: relative;
+  top: 20px;
+}
+#about .about-col .info-col .icon-list-col .icon-list ul li{
+    list-style: none;
+    margin: 15px 0;
+
+}
+#about .about-col .info-col .icon-list-col .icon-list ul li i{
+  color: var(--themeColor);
+  font-size: 25px;
+}
+#about .about-col .info-col .icon-list-col .icon-list ul li strong{
+
+  color: var(--themeColor);
+  font-weight: 600;
+  margin-right: 2px;
+  margin-left: 10px;
+}
+#about .about-col .info-col .icon-list-col .icon-list ul li span{
+  color: var(--textColor);
+  font-weight: 600;
+  font-size: 15px;
+}
+@media only screen and (max-width:850px){
+ 
+  #home .home-row h1{
+    font-family: 'Playfair Display', Georgia, serif; /* O la fuente original que usaras */
+    font-size: 60px;
+    font-weight: 600;
+   
+  }
+  #home .home-row p{
+    right: 50px;
+    bottom: 250px;
+    font-size: 20px;
+  }
+
+  #about{
+    padding: 50px 10px;
+      }
+      #about .parraf{
+        font-size: 14px;
+        letter-spacing: 0;
+        text-align: justify;
+      }
+      #about .about-col{
+        flex-direction: column;
+      }
+      #about .about-col .img-col img{
+        width: 50%;
+      }
+      #about .about-col .info-col h2{
+        font-weight: 600;
+        font-size: 25px;
+        letter-spacing: 0;
+        margin-left: 5px;
+       
+      }
+      #about .about-col .info-col p{
+        
+        font-size: 14px;
+        letter-spacing: 0;
+        margin-left: 0px;
+    
+      }
+      #about .about-col .info-col .icon-list-col{
+        flex-direction: column;
+        gap: 0;
+        margin-left:0;
+      }
+      #about .about-col .info-col .icon-list-col .icon-list ul li{
+       
+        margin: 10px 0;
+    
+    }
+    #about .about-col .info-col .icon-list-col .icon-list ul li strong{
+      font-weight: 500;
+      margin-right: 0;
+    }
+    #about .about-col .info-col .icon-list-col .icon-list ul li span{
+      
+      font-weight: 500;
+      font-size: 12px;
+    }
+}
+/* --- ANIMACIÓN REVEAL --- */
+.reveal-fade {
+  opacity: 0;
+  transform: translateY(40px); /* Empieza 40px más abajo */
+  transition: opacity 1.2s ease, transform 3s ease;
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0); /* Sube a su posición original */
+}
+/* ==========================================================================
+    SECCIÓN SKILLS
+   ========================================================================== */
+
+#skills {
+ padding: 70px 30px;
+  background-color: #2a292c; /* Fondo idéntico al About */
+  min-height: auto;
+  box-sizing: border-box;
+}
+
+/* Títulos y párrafos reutilizan las clases estructuradas del About */
+#skills .heading {
+  font-family: var(--heading), sans-serif;
+  font-size: 48px;
+  color: #c9933b;
+  margin-bottom: 5px;
+}
+
+#skills .divider {
+  width: 130px;
+  height: 3px;
+  background-color: #c9933b;
+  margin-bottom: 25px;
+}
+
+#skills .parraf {
+  color: #f7f7f7;
+  font-size: 17px;
+  letter-spacing: 0.4;
+  font-weight: 400;
+  margin-top: 15px;
+}
+
+/* Contenedor de las dos columnas de habilidades */
+.skills-row {
+  display: flex;
+  gap: 50px;
+  flex-wrap: wrap;
+}
+
+.skills-col {
+  flex: 1;
+  min-width: 300px; /* Evita que se aplasten en pantallas medianas */
+}
+
+/* Bloque de cada habilidad */
+.progress-box {
+  margin-bottom: 25px;
+}
+
+.progress-box h3 {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* El porcentaje a la derecha hereda el color dorado */
+.progress-box h3 span {
+  color: #c9933b;
+}
+
+/* Fondo de la barra de progreso */
+.progress-box .bar {
+  width: 100%;
+  height: 10px;
+  background-color: #404144; /* Gris más claro para que resalte el fondo */
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+/* Relleno de la barra (Progreso real) */
+.progress-box .bar .progress {
+  height: 100%;
+  background-color: #c9933b; 
+  border-radius: 4px;
+  width: 0%; /* Empieza obligatoriamente en cero */
+  /* Esta transición cubic-bezier hace que empiece rápido y frene suavemente al final */
+  transition: width 3s cubic-bezier(0.1, 1, 0.1, 1); 
+}
+.skill-icon {
+  font-size: 30px; 
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+  margin-left: 5px;
+  padding: 2px;
+}
+
+/* --- RESPONSIVE SKILLS --- */
+@media (max-width: 1050px) {
+  #skills {
+    padding: 60px 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .skills-row {
+    flex-direction: column;
+    gap: 0;
+  }
+}
