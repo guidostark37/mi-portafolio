@@ -31,36 +31,40 @@ const AnimatedProgress = ({ skillName, icon, targetProgress }) => {
   useEffect(() => {
     if (!isVisible) return;
 
-    // Animación del número contador que va de 0 al objetivo
-    let start = 0;
-    const duration = 3000; // 3 segundos en total igual que la barra
-    const increment = targetProgress / (duration / 16); // ~60fps
+    const duration = 3000; // 3 segundos exactos
+    const startTime = performance.now();
 
-    const timer = setInterval(() => {
-      start += increment;
-      if (start >= targetProgress) {
-        clearInterval(timer);
-        setCurrentProgress(targetProgress);
+    let animationFrameId;
+
+    const updateNumber = (now) => {
+      const elapsedTime = now - startTime;
+      const progressFraction = Math.min(elapsedTime / duration, 1); // Va de 0 a 1
+      
+      // Multiplicamos la fracción por el objetivo para obtener el número real exacto
+      setCurrentProgress(Math.floor(progressFraction * targetProgress));
+
+      if (progressFraction < 1) {
+        animationFrameId = requestAnimationFrame(updateNumber);
       } else {
-        setCurrentProgress(Math.floor(start));
+        setCurrentProgress(targetProgress); // Asegura cerrar en el número exacto al final
       }
-    }, 16);
+    };
 
-    return () => clearInterval(timer);
+    animationFrameId = requestAnimationFrame(updateNumber);
+
+    return () => cancelAnimationFrame(animationFrameId);
   }, [isVisible, targetProgress]);
 
-  return (
+ return (
     <div className="progress-box" ref={elementRef}>
       <h3>
         <div className="skill-name">
           {icon}
           {skillName}
         </div>
-        {/* El número subirá dinámicamente */}
         <span>{currentProgress}%</span>
       </h3>
       <div className="bar">
-        {/* La barra crecerá gracias al CSS transition y al ancho dinámico */}
         <div 
           className="progress" 
           style={{ width: isVisible ? `${targetProgress}%` : "0%" }}
