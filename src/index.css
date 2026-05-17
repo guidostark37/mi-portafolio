@@ -46,7 +46,7 @@ body {
   width: 100%;
   min-height: 100vh;
   /* Cambiamos a 'cover' para que la imagen cubra toda la sección como un tapiz */
-  background: url('imagenes/nuevo1.png');
+  background: url('/imagenes/nuevo1.png');
   background-size: contain;
   background-position: right;
   background-repeat: no-repeat;
