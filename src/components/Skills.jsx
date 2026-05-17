@@ -29,32 +29,39 @@ const AnimatedProgress = ({ skillName, icon, targetProgress }) => {
 }, []);
 
   useEffect(() => {
-    if (!isVisible) return;
+  if (!isVisible) {
+    setCurrentProgress(0);
+    return;
+  }
 
-    const duration = 3000; // 3 segundos exactos
-    const startTime = performance.now();
+  const duration = 3000; // 3 segundos
+  const startTime = performance.now();
+  let animationFrameId;
 
-    let animationFrameId;
+  const updateNumber = (now) => {
+    const elapsedTime = now - startTime;
+    const progressFraction = Math.min(elapsedTime / duration, 1);
+    
+    setCurrentProgress(Math.floor(progressFraction * targetProgress));
 
-    const updateNumber = (now) => {
-      const elapsedTime = now - startTime;
-      const progressFraction = Math.min(elapsedTime / duration, 1); // Va de 0 a 1
-      
-      // Multiplicamos la fracción por el objetivo para obtener el número real exacto
-      setCurrentProgress(Math.floor(progressFraction * targetProgress));
+    if (progressFraction < 1) {
+      // Sigue el bucle si no ha terminado
+      animationFrameId = requestAnimationFrame(updateNumber);
+    } else {
+      setCurrentProgress(targetProgress); // Asegura el número final exacto
+    }
+  };
 
-      if (progressFraction < 1) {
-        animationFrameId = requestAnimationFrame(updateNumber);
-      } else {
-        setCurrentProgress(targetProgress); // Asegura cerrar en el número exacto al final
-      }
-    };
+  // Arranca la animación en el siguiente frame libre
+  animationFrameId = requestAnimationFrame(updateNumber);
 
-    animationFrameId = requestAnimationFrame(updateNumber);
-
-    return () => cancelAnimationFrame(animationFrameId);
-  }, [isVisible, targetProgress]);
-
+  //  Si el componente cambia o se desmonta, apaga el bucle de inmediato
+  return () => {
+    if (animationFrameId) {
+      cancelAnimationFrame(animationFrameId);
+    }
+  };
+}, [isVisible, targetProgress]); // Agregamos dependencias limpias
  return (
     <div className="progress-box" ref={elementRef}>
       <h3>
