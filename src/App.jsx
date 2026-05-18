@@ -6,6 +6,7 @@ import Resume from './components/Resume';
 import Portfolio from './components/Portfolio';
 import Services from './components/Services';
 import Contacts from './components/Contacts';
+import Evidence from './components/Evidence';
 import './index.css';
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Portfolio />
         <Services />
         <Contacts />
+        <Evidence />
         {/* Aquí iremos colgando las demás secciones a medida que las crees */}
       </main>
     </>

@@ -801,7 +801,7 @@ display: inline-block;
 }
 
 /* ==========================================================================
-   SECCIÓN PORTFOLIO (GRID CON OVERLAY ANIMADO OPTIMIZADO)
+   SECCIÓN PORTFOLIO 
    ========================================================================== */
 
 #portfolio {
@@ -924,7 +924,7 @@ display: inline-block;
 }
 
 /* ==========================================================================
-   SECCIÓN SERVICIOS (OPTIMIZADA PARA REACT ICONS Y MODO OSCURO)
+   SECCIÓN SERVICIOS 
    ========================================================================== */
 
 #servicios {
@@ -1023,7 +1023,7 @@ display: inline-block;
   }
 }
 /* ==========================================================================
-   SECCIÓN CONTACTOS (BLINDADA CONTRA DESBORDES)
+   SECCIÓN CONTACTOS 
    ========================================================================== */
 
 #contactos {
@@ -1199,5 +1199,182 @@ display: inline-block;
   #contactos .contact-row .contac-left,
   #contactos .contact-row .contac-right {
     padding: 20px 15px;
+  }
+}
+
+/* ==========================================================================
+   SECCIÓN DE EVIDENCIAS  (SLIDER NATIVO)
+   ========================================================================== */
+
+.evidence-section {
+  padding: 80px 30px;
+  background: #2a292c; 
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.evidence-title {
+  color: #ffffff;
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  letter-spacing: 0.5px;
+}
+
+.evidence-title .gold-text {
+  color: var(--themeColor, #c9933b); 
+}
+
+.evidence-divider {
+  width: 60px;
+  height: 3px;
+  background: var(--themeColor, #c9933b);
+  margin: 0 auto 50px auto;
+  border-radius: 2px;
+}
+
+/* --- CONTENEDOR MÁSTER DEL SLIDER --- */
+.slider-wrapper {
+  position: relative;
+  max-width: 850px;
+  margin: 0 auto;
+  overflow: hidden; 
+  border-radius: 12px;
+  border: 1px solid rgba(201, 147, 59, 0.15);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  background: #212224;
+}
+
+.slider-track {
+  display: flex;
+  width: 100%;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform;
+}
+
+.slide-item {
+  min-width: 100%;
+  position: relative;
+  aspect-ratio: 16 / 10; 
+  overflow: hidden;
+}
+
+.slide-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* --- OVERLAY OSCURO DE INFORMACIÓN --- */
+.slide-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 40px 30px 45px 30px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.7) 60%, transparent 100%);
+  text-align: left;
+  box-sizing: border-box;
+}
+
+.slide-card-title {
+  color: var(--themeColor, #c9933b);
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  letter-spacing: 0.3px;
+}
+
+.slide-card-desc {
+  color: #daffde;
+  opacity: 0.85;
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+/* --- FLECHAS DE CONTROL --- */
+.slider-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(33, 34, 36, 0.75);
+  border: 1px solid rgba(201, 147, 59, 0.2);
+  color: var(--themeColor, #c9933b);
+  font-size: 18px;
+  padding: 14px 18px;
+  cursor: pointer;
+  border-radius: 50%;
+  z-index: 5;
+  transition: all 0.3s ease;
+  user-select: none;
+}
+
+.slider-arrow:hover {
+  background: var(--themeColor, #c9933b);
+  color: var(--bgcolor, #212224);
+  box-shadow: 0 0 12px rgba(201, 147, 59, 0.4);
+}
+
+.arrow-left { left: 20px; }
+.arrow-right { right: 20px; }
+
+/* --- PUNTOS INFERIORES --- */
+.slider-dots {
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  z-index: 5;
+}
+
+.dot-btn {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.35);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.dot-btn.active {
+  background: var(--themeColor, #c9933b);
+  transform: scale(1.2);
+}
+
+/* --- RESPONSIVE OPTIMIZADO PARA MÓVILES --- */
+@media only screen and (max-width: 768px) {
+  .evidence-section {
+    padding: 60px 15px;
+  }
+  
+  .slide-item {
+    aspect-ratio: 4 / 3; 
+  }
+
+  .slider-arrow {
+    padding: 10px 14px;
+    font-size: 14px;
+  }
+  
+  .arrow-left { left: 10px; }
+  .arrow-right { right: 10px; }
+
+  .slide-overlay {
+    padding: 25px 20px 35px 20px;
+  }
+
+  .slide-card-title {
+    font-size: 1.15rem;
+  }
+
+  .slide-card-desc {
+    font-size: 0.9rem;
   }
 }
