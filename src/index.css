@@ -1022,3 +1022,182 @@ display: inline-block;
     gap: 12px;
   }
 }
+/* ==========================================================================
+   SECCIÓN CONTACTOS (BLINDADA CONTRA DESBORDES)
+   ========================================================================== */
+
+#contactos {
+  padding: 70px 30px;
+  background: #2a292c; /* Mismo fondo base del proyecto */
+  box-sizing: border-box;
+}
+
+#contactos .parrafo5 {
+  color: #a8a3b3;
+  font-size: 18px;
+  letter-spacing: 0.4px;
+  font-weight: 400;
+  margin-top: 15px;
+  text-align: justify;
+}
+
+/* Fila contenedora en Flexbox */
+#contactos .contact-row {
+  margin-top: 50px;
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  box-sizing: border-box; /* Fuerza a medir el espacio real */
+}
+
+/* --- COLUMNA IZQUIERDA (Info y Mapa) --- */
+#contactos .contact-row .contac-left {
+  flex-basis: 40%;
+  min-width: 40%;
+  background: #2a292c;
+  box-shadow: 0 0 20px rgba(189, 188, 188, 0.2);
+  border-radius: 4px;
+  padding: 30px;
+  box-sizing: border-box; /* Asegura que el padding no estire la caja */
+}
+
+#contactos .contact-row .contac-left .icon-box {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  margin: 30px 0;
+}
+
+/* Círculo contenedor para el SVG de react-icons */
+#contactos .contact-row .contac-left .icon-box .icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid var(--themeColor);
+  font-size: 20px;
+  color: var(--themeColor);
+  background: transparent;
+  transition: 0.5s ease;
+  
+  /* Centrado perfecto del icono SVG */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Efecto Hover en los círculos de contacto */
+#contactos .contact-row .contac-left .icon-box:hover .icon {
+  background: var(--themeColor);
+  color: var(--bgcolor);
+}
+
+#contactos .contact-row .contac-left .icon-box .info h4 {
+  font-size: 18px;
+  color: #ffffff; 
+  font-weight: 600;
+  width: 100%; 
+}
+
+#contactos .contact-row .contac-left .icon-box .info h4 + p {
+  color:#cac8c8;
+  font-size: 15px;
+  font-weight: 500;
+  margin-top: 2px;
+}
+
+/* Contenedor del Mapa */
+#contactos .contact-row .contac-left .mapa {
+  margin-top: 20px;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid rgba(201, 147, 59, 0.1);
+  width: 100%;
+}
+
+/* CORRECCIÓN: Obligamos al iframe del mapa a no medir ni un píxel más que su contenedor */
+#contactos .contact-row .contac-left .mapa iframe {
+  width: 100% !important;
+  max-width: 100%;
+  display: block;
+}
+
+/* --- COLUMNA DERECHA (Formulario) --- */
+#contactos .contact-row .contac-right {
+  flex-basis: 60%;
+  min-width: 60%;
+  background: #2a292c;
+  box-shadow: 0 0 20px rgba(245, 241, 241, 0.2);
+  border-radius: 4px;
+  padding: 30px;
+  box-sizing: border-box; /* Evita que el padding sume al ancho total */
+}
+
+/* Inputs y Textarea del Formulario */
+#contactos .contact-row .contac-right form input, 
+#contactos .contact-row .contac-right form textarea {
+  display: block;
+  margin: 25px 0;
+  padding: 10px 20px;
+  width: 100%;
+  font-size: 15px;
+  font-weight: 500;
+  color: #ffffff; 
+  background: #1a1b1d; 
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  outline: none;
+  resize: none; /* Permite redimensionar solo verticalmente */
+  box-sizing: border-box; /* El padding se queda adentro */
+  transition: 0.3s ease;
+}
+
+/* Animación de Focus al hacer clic en los campos */
+#contactos .contact-row .contac-right form input:focus, 
+#contactos .contact-row .contac-right form textarea:focus {
+  border: 1px solid var(--themeColor);
+  box-shadow: 0 0 8px rgba(201, 147, 59, 0.2);
+}
+
+/* Estilos del Botón de Enviar */
+#contactos .contact-row .contac-right form input[type=submit] {
+  background: var(--themeColor);
+  color: var(--bgcolor);
+  border: 1px solid var(--themeColor);
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  margin-top: 40px;
+  transition: 0.4s ease;
+}
+
+#contactos .contact-row .contac-right form input[type=submit]:hover {
+  background: transparent;
+  color: var(--themeColor);
+}
+
+/* --- RESPONSIVE OPTIMIZADO --- */
+@media only screen and (max-width: 900px) {
+  #contactos .contact-row {
+    flex-direction: column; /* Las columnas se apilan verticalmente */
+    gap: 25px;
+  }
+  #contactos .contact-row .contac-left,
+  #contactos .contact-row .contac-right {
+    flex-basis: 100% !important;
+    width: 100% !important;
+    max-width: 100%;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  #contactos {
+    padding: 50px 15px;
+  }
+  #contactos .contact-row .contac-left,
+  #contactos .contact-row .contac-right {
+    padding: 20px 15px;
+  }
+}
