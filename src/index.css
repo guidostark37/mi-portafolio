@@ -922,3 +922,103 @@ display: inline-block;
     grid-gap: 20px;
   }
 }
+
+/* ==========================================================================
+   SECCIÓN SERVICIOS (OPTIMIZADA PARA REACT ICONS Y MODO OSCURO)
+   ========================================================================== */
+
+#servicios {
+  padding: 70px 30px;
+  /* CAMBIO: Fondo oscuro idéntico a About Me / Skills */
+  background: #2a292c; 
+}
+
+#servicios .parrafo4 {
+  /* CAMBIO: Texto claro para contraste óptimo sobre el fondo oscuro */
+  color: #ffffff;
+  font-size: 15px;
+  letter-spacing: 0.4px;
+  font-weight: 400;
+  margin-top: 15px;
+  text-align: justify;
+}
+
+/* Contenedor de servicios en Grid */
+#servicios .servicios-row {
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 35px;
+  transition: 1s ease;
+}
+
+/* Caja individual (Alineación horizontal del icono y texto) */
+#servicios .servicios-row .servicios-box {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start; /* Alinea el icono arriba si el texto es largo */
+}
+
+/* ADAPTACIÓN REACT: Aplicamos tu círculo animado directamente al contenedor del icono */
+#servicios .servicios-row .servicios-box .icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid var(--themeColor);
+  font-size: 22px;
+  background: var(--themeColor);
+  color: var(--bgcolor);
+  transition: 0.5s ease;
+  
+  /* Flexbox interno para centrar perfectamente el SVG de react-icons */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0; /* Evita que el círculo se deforme si el texto es muy largo */
+}
+
+/* Efecto Hover original en el icono */
+#servicios .servicios-row .servicios-box:hover .icon {
+  background: var(--bgcolor);
+  color: var(--themeColor);
+  transform: rotate(360px); /* Opcional: un sutil giro si te gusta, si no, puedes quitarlo */
+}
+
+/* Caja de textos del servicio */
+#servicios .servicios-row .servicios-box .serv-info h4 {
+  /* CAMBIO: Color claro/blanco para que resalte en el fondo oscuro */
+  color: #ffffff; 
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+#servicios .servicios-row .servicios-box .serv-info h4 + p {
+  color: var(--textColor);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: justify;
+}
+
+/* --- RESPONSIVE UNIFICADO --- */
+@media only screen and (max-width: 992px) {
+  #servicios .servicios-row {
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas en tablets */
+    grid-gap: 25px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  #servicios {
+    padding: 50px 15px;
+  }
+  #servicios .servicios-row {
+    grid-template-columns: 1fr; /* 1 sola columna limpia en móviles */
+    grid-gap: 20px;
+  }
+  #servicios .servicios-row .servicios-box {
+    flex-direction: column; /* Opcional: El icono se posiciona arriba en móviles pequeños */
+    gap: 12px;
+  }
+}
