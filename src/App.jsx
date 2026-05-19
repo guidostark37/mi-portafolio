@@ -18,11 +18,12 @@ function App() {
         <About/>
         <Skills />
         <Resume/>
+        <Evidence />
         <Portfolio />
         <Services />
         <Contacts />
-        <Evidence />
-        {/* Aquí iremos colgando las demás secciones a medida que las crees */}
+        
+        
       </main>
     </>
   );

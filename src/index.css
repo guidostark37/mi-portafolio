@@ -1,42 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+*, *::before, *::after {
+  font-family: 'Poppins', sans-serif !important;
+}
+
+/* Aplicar la fuente a todo el portafolio */
+body, header, nav, h1, h2, h3, a {
+  font-family: 'Poppins', sans-serif !important;
+}
 
 body {
   margin: 0;
   background: #2a292c; 
-  color: var(--text); 
+  color: var(--textColor, #747272);
+  -webkit-font-smoothing: antialiased; /* Suaviza los bordes de las letras en Chrome/Safari */
+  -moz-osx-font-smoothing: grayscale; /* Suaviza las letras en Firefox */ 
 }
 
-#root {
-  /* Forzamos a que el contenedor de React ocupe todo el ancho real de la pantalla */
+section {
   width: 100%;
-  max-width: 100% !important;
-  margin: 0 !important;
-  text-align: left !important; /* Los textos e iconos vuelven a alinearse a la izquierda */
-  min-height: 100vh;
-  
-  /* Flexbox en fila: Header a la izquierda, Main a la derecha */
-  display: flex;
-  flex-direction: row; 
+  padding: 80px 60px; /* Colchón uniforme arriba/abajo y a los lados */
   box-sizing: border-box;
-   --sideBGcolor: #070707 ;
-  /* --themeColor: #3dc4fe ; */
-  /* --themeColor: #b92410 ; */
-  --themeColor: #b97d10 ;
+}
+
+/* 1. DECLARACIÓN GLOBAL EN LA RAÍZ DEL DOCUMENTO (OBLIGATORIO) */
+:root {
+  --sideBGcolor: #070707;
+  --themeColor: #b97d10; /* Color inicial dorado */
   --iconBGcolor: #2c2f3f;
   --textColor: #747272;
   --bgcolor: #f7f7f7;
 }
 
+/* 2. TU CONFIGURACIÓN DE ESTRUCTURA PARA EL DIV DE REACT */
+#root {
+  width: 100%;
+  max-width: 100% !important;
+  margin: 0 !important;
+  text-align: left !important; 
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
 /* El contenedor del contenido al lado del menú */
 .main-content {
   flex: 1;
-  margin-left: 300px; /* Crea el colchón exacto de 300px para no pisar el menú fixed */
+  padding-left: 300px; 
+  margin-left: 0; 
   min-height: 100vh;
   background: var(--bg);
-  transition: 0.5s;
+  transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
   display: flex;
   flex-direction: column;
+  box-sizing: border-box; /* Crucial para que el padding no estire el ancho total */
 }
 
 /* ==========================================================================
@@ -89,7 +105,7 @@ body {
 }
 
 #home .home-row h1 span {
-  color: var(--themeColor);
+  color: var(--themeColor, #b97d10);
 }
 
 #home .home-row p {
@@ -101,7 +117,7 @@ body {
 }
 
 #home .home-row p span {
-  border-bottom: 4px solid var(--themeColor);
+  border-bottom: 4px solid var(--themeColor, #b97d10);
 }
 
 /* ==========================================================================
@@ -127,40 +143,49 @@ body {
    ESTILOS COMPLETOS PARA EL MENÚ LATERAL (HEADER)
    ========================================================================== */
 
+/* ==========================================================================
+   BARRA LATERAL (HEADER) COMPLETA, DINÁMICA Y RESPONSIVE
+   ========================================================================== */
+
+/* --- Contenedor Principal del Header --- */
 header {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 300px;
   height: 100vh;
-  padding: 30px 25px;
-  background-color: #08060d; /* Fondo oscuro elegante para el menú */
-  overflow-y: auto;
-  position: fixed; /* Lo clava a la izquierda y no se mueve con el scroll */
-  left: 0;
-  top: 0;
-  bottom: 0;
-  z-index: 99999 !important; /* Pasa por encima de la imagen de fondo */
+  background-color: var(--sideBGcolor, #070707);
+  padding: 30px 20px;
+  box-sizing: border-box;
+  z-index: 999;
+  transition: all 0.4s ease;
+  
+  /* Flexbox vertical para distribuir Perfil, Navbar y Footer de arriba a abajo */
   display: flex;
   flex-direction: column;
-  box-sizing: border-box;
+  justify-content: space-between; 
 }
 
 /* --- Foto de Perfil y Nombre --- */
 header .perfil {
   text-align: center;
-  margin-bottom: 25px;
+  margin-bottom: 15px;
+  flex-shrink: 0; /* Evita que el perfil se aplaste en pantallas bajas */
 }
 
 header .perfil img {
   width: 120px;
   height: 120px;
   border-radius: 50%;
- border: 6px solid var(--themeColor, #ffb703); /* Círculo de fondo para la foto */
+  border: 6px solid var(--themeColor); /* ⚡ DINÁMICO: Cambia con el picker */
   object-fit: cover;
   margin-bottom: 15px;
+  transition: border-color 0.3s ease;
 }
 
 header .perfil h1 {
   font-size: 24px;
-  font-weight: 600;
+  font-weight: 700;
   color: #f7f7f7 !important;
   margin: 0 0 15px 0;
   letter-spacing: 0.5px;
@@ -171,7 +196,7 @@ header .perfil .redes {
   display: flex;
   justify-content: center;
   gap: 12px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 header .perfil .redes a {
@@ -185,57 +210,212 @@ header .perfil .redes a {
   border-radius: 50%;
   text-decoration: none;
   font-size: 16px;
-  transition: 0.3s;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 header .perfil .redes a:hover {
-  background: var(--accent, #b97d10); 
+  background: var(--themeColor); /* ⚡ DINÁMICO */
   color: #fff;
+  transform: translateY(-3px);
 }
 
-/* --- Lista de Navegación (Navbar) --- */
+/* --- Lista de Navegación con Scroll Interno Inteligente --- */
 header .navbar {
-  margin-top: 15px;
+  margin-top: 10px;
+  /* Ajustado el cálculo restando más espacio para que quepa el nuevo mini-footer sin colapsar */
+  max-height: calc(100vh - 360px); 
+  overflow-y: auto; 
+  overflow-x: hidden;
+  padding-right: 5px; 
+  flex-grow: 1; /* Permite que la barra use el espacio central libre */
 }
 
 header .navbar ul {
-  list-style: none; /* Quitamos los puntitos azules molestos */
+  list-style: none; 
   padding: 0;
   margin: 0;
 }
 
 header .navbar ul li {
-  padding: 12px 0;
+  padding: 4px 0;
   position: relative;
 }
 
 header .navbar ul li a {
   display: flex;
   align-items: center;
-  gap: 15px; /* Separa el icono de React-Icons del texto */
-  color: #a8a3b3; /* Gris claro para los enlaces */
-  text-decoration: none; /* Quita el subrayado azul de los enlaces */
-  font-size: 16px;
+  gap: 15px; 
+  color: #a8a3b3; 
+  text-decoration: none; 
+  font-size: 15px;
   font-weight: 500;
-  transition: 0.3s;
+  padding: 10px 0 10px 10px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
 }
 
 /* Estilo para los iconos de React-Icons */
 header .navbar ul li a svg {
   font-size: 18px;
   color: #a8a3b3;
-  transition: 0.3s;
+  transition: all 0.3s ease;
 }
 
 /* --- Efectos Hover y Link Activo --- */
 header .navbar ul li a:hover,
 header .navbar ul li a.active {
-  color: #fff; /* El texto se ilumina en blanco */
+  color: var(--themeColor); /* ⚡ DINÁMICO */
+  background: rgba(255, 255, 255, 0.02); /* Fondo sutil neutro para que resalte cualquier color */
+  padding-left: 18px; 
 }
 
 header .navbar ul li a:hover svg,
 header .navbar ul li a.active svg {
-  color: var(--accent, #b97d10); /* El icono se vuelve morado */
+  color: var(--themeColor); /* ⚡ DINÁMICO */
+  transform: scale(1.15);
+}
+
+/* --- ESTILIZADO DE LA BARRA DE SCROLL INTERNA --- */
+header .navbar::-webkit-scrollbar {
+  width: 5px;
+}
+
+header .navbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+header .navbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+}
+
+header .navbar::-webkit-scrollbar-thumb:hover {
+  background: var(--themeColor); /* ⚡ DINÁMICO */
+}
+
+/* --- INTERFAZ DEL MINI-FOOTER INTEGRADO --- */
+.sidebar-footer {
+  width: 100%;
+  text-align: center;
+  padding-top: 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  box-sizing: border-box;
+  flex-shrink: 0; /* Evita que el footer se deforme en pantallas cortas */
+}
+
+/* Sección Color Picker */
+.color-picker-container {
+  margin-bottom: 14px;
+  text-align: center;
+}
+
+.picker-title {
+  font-size: 11px;
+  color: #747272;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 500;
+}
+
+.color-palette {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* Botones redondos de color */
+.color-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.color-dot:hover {
+  transform: scale(1.25);
+}
+
+/* Anillo blanco exterior en el color seleccionado */
+.color-dot.active {
+  transform: scale(1.25);
+  border-color: #ffffff;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
+}
+
+/* Insignia de Estado Profesional (Disponible) */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: rgba(46, 204, 113, 0.08);
+  padding: 6px 14px;
+  border-radius: 30px;
+  border: 1px solid rgba(46, 204, 113, 0.15);
+  margin-bottom: 12px;
+}
+
+.status-badge p {
+  font-size: 11px;
+  color: #2ecc71; 
+  margin: 0;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+/* Punto verde central */
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #2ecc71;
+  border-radius: 50%;
+  position: relative;
+}
+
+/* Pseudo-elemento para la animación del radar */
+.pulse-dot::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #2ecc71;
+  border-radius: 50%;
+  top: 0;
+  left: 0;
+  animation: ondasPulso 1.8s infinite ease-in-out;
+}
+
+@keyframes ondasPulso {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(2.8);
+    opacity: 0;
+  }
+}
+
+/* Texto de copyright */
+.sidebar-copyright {
+  font-size: 11px;
+  color: var(--textColor, #747272);
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+.sidebar-copyright span {
+  color: #ffffff;
+  font-weight: 500;
+}
+
+/* --- OTROS COMPONENTES GLOBALES MUTABLES --- */
+.progress-bar-fill {
+  background-color: var(--themeColor); /* ⚡ DINÁMICO */
 }
 
 /* --- Botón de Menú Móvil (Oculto en PC) --- */
@@ -243,34 +423,40 @@ header .navbar ul li a.active svg {
   position: fixed;
   right: 15px;
   top: 15px;
-  font-size: 24px;
-  width: 40px;
-  height: 40px;
-  background-color: var(--accent, #b97d10);
-  color: #fff;
+  font-size: 20px;
+  width: 45px;
+  height: 45px;
+  background-color: var(--themeColor); /* ⚡ DINÁMICO */
+  color: #08060d; 
   border-radius: 50%;
-  display: inline-flex;
+  display: none; 
   align-items: center;
   justify-content: center;
   cursor: pointer;
   z-index: 100000 !important;
-  display: none; /* Se oculta por defecto en computadores */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease;
+}
+
+#menubtn:active {
+  transform: scale(0.9);
 }
 
 /* --- Ajuste Responsive para Pantallas Pequeñas --- */
 @media only screen and (max-width: 1050px) {
   header {
-    left: -300px; /* Esconde el menú en celulares */
-    transition: 0.5s;
+    left: -300px; 
+    transition: cubic-bezier(0.25, 1, 0.5, 1) 0.4s;
+    background-color: #0c0a12;
   }
   
   #menubtn {
-    display: inline-flex; /* Aparece el botón de hamburguesa en celulares */
+    display: inline-flex; 
   }
   
-  /* Clase que activa React al presionar el botón en el celular */
   body.mobile-nav-active header {
     left: 0;
+    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.6);
   }
 }
 
@@ -439,7 +625,7 @@ header .navbar ul li a.active svg {
    ========================================================================== */
 
 #skills {
- padding: 70px 30px;
+  padding: 70px 30px;
   background-color: #2a292c; /* Fondo idéntico al About */
   min-height: auto;
   box-sizing: border-box;
@@ -449,21 +635,23 @@ header .navbar ul li a.active svg {
 #skills .heading {
   font-family: var(--heading), sans-serif;
   font-size: 48px;
-  color: #c9933b;
+  color: var(--themeColor); /* ⚡ DINÁMICO: El título de Skills cambia de color */
   margin-bottom: 5px;
+  transition: color 0.3s ease;
 }
 
 #skills .divider {
   width: 130px;
   height: 3px;
-  background-color: #c9933b;
+  background-color: var(--themeColor); /* ⚡ DINÁMICO: La línea de abajo cambia de color */
   margin-bottom: 25px;
+  transition: background-color 0.3s ease;
 }
 
 #skills .parraf {
   color: #f7f7f7;
   font-size: 17px;
-  letter-spacing: 0.4;
+  letter-spacing: 0.4px;
   font-weight: 400;
   margin-top: 15px;
 }
@@ -487,6 +675,7 @@ header .navbar ul li a.active svg {
 
 .progress-box h3 {
   display: flex;
+  align-items: center; /* Centra los iconos con el texto si los usas */
   justify-content: space-between;
   font-size: 16px;
   font-weight: 600;
@@ -496,9 +685,10 @@ header .navbar ul li a.active svg {
   letter-spacing: 0.5px;
 }
 
-/* El porcentaje a la derecha hereda el color dorado */
+/* El porcentaje a la derecha cambia dinámicamente */
 .progress-box h3 span {
-  color: #c9933b;
+  color: var(--themeColor); /* ⚡ DINÁMICO: El número del % se ilumina del nuevo color */
+  transition: color 0.3s ease;
 }
 
 /* Fondo de la barra de progreso */
@@ -513,18 +703,20 @@ header .navbar ul li a.active svg {
 /* Relleno de la barra (Progreso real) */
 .progress-box .bar .progress {
   height: 100%;
-  background-color: #c9933b; 
+  background-color: var(--themeColor); /* ⚡ DINÁMICO: El relleno interno de la barra cambia de color */
   border-radius: 4px;
   width: 0%; /* Empieza obligatoriamente en cero */
   /* Esta transición cubic-bezier hace que empiece rápido y frene suavemente al final */
-  transition: width 3s cubic-bezier(0.1, 1, 0.1, 1); 
+  transition: width 3s cubic-bezier(0.1, 1, 0.1, 1), background-color 0.3s ease; 
 }
+
 .skill-icon {
   font-size: 30px; 
   flex-shrink: 0;
   transition: transform 0.3s ease;
   margin-left: 5px;
   padding: 2px;
+  color: var(--themeColor); /* ⚡ DINÁMICO: Los iconos de las tecnologías se pintan también */
 }
 
 /* --- RESPONSIVE SKILLS --- */
@@ -874,7 +1066,7 @@ display: inline-block;
 
 #portfolio .port-row .port-item .port-info h4 {
   color: var(--bgcolor);
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 600;
   text-transform: uppercase;
   margin: 0;
@@ -1378,3 +1570,4 @@ display: inline-block;
     font-size: 0.9rem;
   }
 }
+
