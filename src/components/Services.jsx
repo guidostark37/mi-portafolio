@@ -54,7 +54,7 @@ const misServicios = [
 export default function Servicios() {
   return (
     <section id="servicios">
-      <h1 className="heading">Services</h1>
+      <h1 className="heading">Servicios</h1>
       <div className="divider"></div>
       <p className="parrafo4">
         Ofrezco soluciones integrales de desarrollo y automatización de software. 

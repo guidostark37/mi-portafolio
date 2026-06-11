@@ -5,7 +5,8 @@ import { FaEnvelope, FaPhone, FaMapMarkerAlt } from 'react-icons/fa';
 export default function Contacts() {
   return (
     <section id="contactos">
-      <h1 className="heading">Contacts</h1>
+      {/* 🌟 CAMBIO VISUAL: Encabezado principal traducido */}
+      <h1 className="heading">Contacto</h1>
       <div className="divider"></div>
       <p className="parrafo5">
         ¿Tienes un proyecto en mente o una oportunidad de colaboración? Ponte en contacto conmigo. 
@@ -21,7 +22,8 @@ export default function Contacts() {
               <FaEnvelope />
             </div>
             <div className="info">
-              <h4>Email:</h4>
+              {/* Traducido a español */}
+              <h4>Correo Electrónico:</h4>
               <p>bguido10@gmail.com</p>
             </div>
           </div>
@@ -31,8 +33,9 @@ export default function Contacts() {
               <FaPhone />
             </div>
             <div className="info">
-              <h4>Call:</h4>
-              <p>+57 3005535249</p>
+              {/* Traducido a español */}
+              <h4>Teléfono:</h4>
+              <p>+57 300 772 7385</p>
             </div>
           </div>
 
@@ -41,7 +44,8 @@ export default function Contacts() {
               <FaMapMarkerAlt />
             </div>
             <div className="info">
-              <h4>Location:</h4>
+              {/* Traducido a español */}
+              <h4>Ubicación:</h4>
               <p>Fonseca - La Guajira, Colombia</p>
             </div>
           </div>
@@ -62,17 +66,19 @@ export default function Contacts() {
 
         </div>
 
-        {/* Columna Derecha: Formulario de Contacto */}
+        {/* Columna Derecha: Formulario de Contacto público en español */}
         <div className="contac-right">
           <form action="https://formsubmit.co/bguido10@gmail.com" method="POST">
-            <input type="text" name="name" id="name" placeholder="Your name" required />
-            <input type="email" name="email" id="email" placeholder="Your Email" required />
-            <input type="text" name="subject" id="subject" placeholder="Subject" required />
-            <textarea name="msg" id="msg" rows="9" placeholder="Your Message" required></textarea>
+            {/* Traducidos los placeholders para que el usuario entienda qué escribir */}
+            <input type="text" name="name" id="name" placeholder="Tu nombre" required />
+            <input type="email" name="email" id="email" placeholder="Tu correo electrónico" required />
+            <input type="text" name="subject" id="subject" placeholder="Asunto" required />
+            <textarea name="msg" id="msg" rows="9" placeholder="Tu mensaje" required></textarea>
             
-            <input type="submit" value="Send Message" />
+            {/* Botón de envío en español */}
+            <input type="submit" value="Enviar Mensaje" />
             
-            {/* Opciones de FormSubmit (El link de redirección se puede ajustar al de Vercel después) */}
+            {/* Opciones internas de FormSubmit (Inalteradas para no romper la lógica) */}
             <input type="hidden" name="_next" value="https://mi-portafolio-lime-eight.vercel.app/" />
             <input type="hidden" name="_captcha" value="false" />
           </form>

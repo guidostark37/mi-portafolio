@@ -120,22 +120,22 @@ export default function Header() {
         <ul>
           <li>
             <a href="#home" className={activeSection === 'home' ? 'active' : ''} onClick={(e) => handleLinkClick(e, 'home')}>
-              <FaHome /> Home
+              <FaHome /> Inicio
             </a>
           </li>
           <li>
             <a href="#about" className={activeSection === 'about' ? 'active' : ''} onClick={(e) => handleLinkClick(e, 'about')}>
-              <FaUser /> About Me
+              <FaUser /> Sobre Mi
             </a>
           </li>
           <li>
             <a href="#skills" className={activeSection === 'skills' ? 'active' : ''} onClick={(e) => handleLinkClick(e, 'skills')}>
-              <FaFileAlt /> Skills
+              <FaFileAlt /> Habilidades
             </a>
           </li>
           <li>
             <a href="#resume" className={activeSection === 'resume' ? 'active' : ''} onClick={(e) => handleLinkClick(e, 'resume')}>
-              <FaBook /> Resume
+              <FaBook /> Trayectoria
             </a>
           </li>
           <li>
@@ -145,7 +145,7 @@ export default function Header() {
           </li>
           <li>
             <a href="#portfolio" className={activeSection === 'portfolio' ? 'active' : ''} onClick={(e) => handleLinkClick(e, 'portfolio')}>
-              <FaServer /> Portfolio
+              <FaServer /> Portafolio
             </a>
           </li>
           <li>
@@ -155,7 +155,7 @@ export default function Header() {
           </li>
           <li>
             <a href="#contactos" className={activeSection === 'contactos' ? 'active' : ''} onClick={(e) => handleLinkClick(e, 'contactos')}>
-              <FaEnvelope /> Contact
+              <FaEnvelope /> Contacto
             </a>
           </li>
         </ul>

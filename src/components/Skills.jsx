@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { FaHtml5, FaCss3Alt, FaJsSquare, FaReact, FaLaravel, FaFileExcel } from "react-icons/fa";
 
-
 // Componente secundario para animar el número individualmente
 const AnimatedProgress = ({ skillName, icon, targetProgress }) => {
   const [currentProgress, setCurrentProgress] = useState(0);
@@ -9,60 +8,61 @@ const AnimatedProgress = ({ skillName, icon, targetProgress }) => {
   const elementRef = useRef(null);
 
   useEffect(() => {
-  const observer = new IntersectionObserver(
-    ([entry]) => {
-      if (entry.isIntersecting) {
-        setIsVisible(true);
-      } else {
-        // Al salir de la sección, reiniciamos los estados para que se pueda volver a animar
-        setIsVisible(false);
-        setCurrentProgress(0); 
-      }
-    },
-    { threshold: 0.1 } // Activa/desactiva cuando se ve el 10% de la barra
-  );
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        } else {
+          // Al salir de la sección, reiniciamos los estados para que se pueda volver a animar
+          setIsVisible(false);
+          setCurrentProgress(0); 
+        }
+      },
+      { threshold: 0.1 } // Activa/desactiva cuando se ve el 10% de la barra
+    );
 
-  if (elementRef.current) observer.observe(elementRef.current);
-  return () => {
-    if (elementRef.current) observer.unobserve(elementRef.current);
-  };
-}, []);
+    if (elementRef.current) observer.observe(elementRef.current);
+    return () => {
+      if (elementRef.current) observer.unobserve(elementRef.current);
+    };
+  }, []);
 
   useEffect(() => {
-  if (!isVisible) {
-    setCurrentProgress(0);
-    return;
-  }
-
-  const duration = 3000; // 3 segundos
-  const startTime = performance.now();
-  let animationFrameId;
-
-  const updateNumber = (now) => {
-    const elapsedTime = now - startTime;
-    const progressFraction = Math.min(elapsedTime / duration, 1);
-    
-    setCurrentProgress(Math.floor(progressFraction * targetProgress));
-
-    if (progressFraction < 1) {
-      // Sigue el bucle si no ha terminado
-      animationFrameId = requestAnimationFrame(updateNumber);
-    } else {
-      setCurrentProgress(targetProgress); // Asegura el número final exacto
+    if (!isVisible) {
+      setCurrentProgress(0);
+      return;
     }
-  };
 
-  // Arranca la animación en el siguiente frame libre
-  animationFrameId = requestAnimationFrame(updateNumber);
+    const duration = 3000; // 3 segundos
+    const startTime = performance.now();
+    let animationFrameId;
 
-  //  Si el componente cambia o se desmonta, apaga el bucle de inmediato
-  return () => {
-    if (animationFrameId) {
-      cancelAnimationFrame(animationFrameId);
-    }
-  };
-}, [isVisible, targetProgress]); // Agregamos dependencias limpias
- return (
+    const updateNumber = (now) => {
+      const elapsedTime = now - startTime;
+      const progressFraction = Math.min(elapsedTime / duration, 1);
+      
+      setCurrentProgress(Math.floor(progressFraction * targetProgress));
+
+      if (progressFraction < 1) {
+        // Sigue el bucle si no ha terminado
+        animationFrameId = requestAnimationFrame(updateNumber);
+      } else {
+        setCurrentProgress(targetProgress); // Asegura el número final exacto
+      }
+    };
+
+    // Arranca la animación en el siguiente frame libre
+    animationFrameId = requestAnimationFrame(updateNumber);
+
+    // Si el componente cambia o se desmonta, apaga el bucle de inmediato
+    return () => {
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
+    };
+  }, [isVisible, targetProgress]); // Agregamos dependencias limpias
+
+  return (
     <div className="progress-box" ref={elementRef}>
       <h3>
         <div className="skill-name">
@@ -84,7 +84,8 @@ const AnimatedProgress = ({ skillName, icon, targetProgress }) => {
 export default function Skills() {
   return (
     <section id="skills">
-      <h1 className="heading">Skills</h1>
+      {/* 1. Cambiamos el título de la sección a Español */}
+      <h1 className="heading">Habilidades</h1>
       <div className="divider"></div>
       <p className="parraf">
         A lo largo de mi carrera como desarrollador e instructor, he adquirido un conjunto sólido de habilidades 
@@ -100,13 +101,15 @@ export default function Skills() {
             icon={<FaHtml5 className="skill-icon html-icon" />} 
             targetProgress={85} 
           />
+          {/* Corrección menor: Estándar camelCase de JavaScript */}
           <AnimatedProgress 
-            skillName={<em>Javascript</em>} 
+            skillName={<em>JavaScript</em>} 
             icon={<FaJsSquare className="skill-icon js-icon" />} 
             targetProgress={65} 
           />
+          {/* Estética: Más limpio omitir el .js secundario */}
           <AnimatedProgress 
-            skillName={<em>React.js</em>} 
+            skillName={<em>React</em>} 
             icon={<FaReact className="skill-icon react-icon" />} 
             targetProgress={90} 
           />

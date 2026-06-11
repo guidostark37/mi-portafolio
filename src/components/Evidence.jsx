@@ -1,34 +1,35 @@
 import React, { useState, useEffect } from 'react';
 
+// Estructura de datos completamente traducida al español
 const evidenceData = [
   {
     id: 1,
     image: "/assets/aprendiendo-mobile.jpg",
-    title: "Full-Stack & Mobile Development",
+    title: "Desarrollo Full-Stack y Móvil",
     desc: "Integración de lógica de servidor con interfaces móviles responsivas en tiempo real."
   },
   {
     id: 2,
     image: "/assets/codigo-react.jpg",
-    title: "Clean Code & Architecture",
+    title: "Código Limpio y Arquitectura",
     desc: "Escritura de código modular, limpio y mantenible bajo estándares modernos de React."
   },
   {
     id: 3,
     image: "/assets/siscan-vc.jpg",
-    title: "Enterprise Systems",
+    title: "Sistemas Empresariales",
     desc: "Despliegue y gestión de la plataforma SISCAN-VC en entornos de producción real corporativa."
   },
   {
     id: 4,
     image: "/assets/maquetacion.jpg",
-    title: "UI/UX Architecture",
+    title: "Arquitectura UI/UX",
     desc: "Maquetación estructural y flujos de usuario enfocados en la usabilidad y estética del software."
   },
   {
     id: 5,
     image: "/assets/trabajoexcel.jpg",
-    title: "Data Intelligence & Automation",
+    title: "Inteligencia de Datos y Automatización",
     desc: "Automatización de reportes y optimización de flujos administrativos mediante análisis de datos."
   }
 ];
@@ -48,16 +49,16 @@ export default function WorkingEvidence() {
     );
   };
 
-  // --- LÓGICA DE AUTOPLAY EXCLUSIVA PARA CELULARES ---
+  // --- LÓGICA DE AUTOPLAY EXCLUSIVA PARA MÓVILES (ADAPTADA A 850PX) ---
   useEffect(() => {
-    // Definimos el media query para pantallas menores o iguales a 768px (celulares)
-    const mediaQuery = window.matchMedia('(max-width: 768px)');
+    // Sincronizado con el resto de tus secciones responsive a 850px
+    const mediaQuery = window.matchMedia('(max-width: 850px)');
     
     let intervalId = null;
 
     const handleAutoplay = () => {
       if (mediaQuery.matches) {
-        // Si es tamaño celular, activa el intervalo de 4 segundos
+        // Si es tamaño móvil/tablet, activa el intervalo de 4 segundos
         intervalId = setInterval(() => {
           nextSlide();
         }, 4000);
@@ -70,7 +71,7 @@ export default function WorkingEvidence() {
     // Ejecuta la comprobación al montar el componente
     handleAutoplay();
 
-    // Escucha si el usuario cambia el tamaño de la pantalla (redimensionar ventana)
+    // Escucha si el usuario cambia el tamaño de la pantalla
     mediaQuery.addEventListener('change', handleAutoplay);
 
     // Limpieza al desmontar el componente para evitar fugas de memoria
@@ -82,8 +83,9 @@ export default function WorkingEvidence() {
 
   return (
     <section id="evidence" className="evidence-section">
+      {/* Título de la sección traducido */}
       <h1 className="evidence-title">
-        Working <span className="gold-text">Evidence</span>
+        Evidencia de <span className="gold-text">Trabajo</span>
       </h1>
       <div className="evidence-divider"></div>
 
@@ -108,16 +110,18 @@ export default function WorkingEvidence() {
           ))}
         </div>
 
-        <button onClick={prevSlide} className="slider-arrow arrow-left">&#10094;</button>
-        <button onClick={nextSlide} className="slider-arrow arrow-right">&#10095;</button>
+        {/* Botones de navegación interna */}
+        <button onClick={prevSlide} className="slider-arrow arrow-left" aria-label="Diapositiva anterior">&#10094;</button>
+        <button onClick={nextSlide} className="slider-arrow arrow-right" aria-label="Siguiente diapositiva">&#10095;</button>
 
+        {/* Indicadores de posición inferiores traducidos para lectores de pantalla */}
         <div className="slider-dots">
           {evidenceData.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentIndex(index)}
               className={`dot-btn ${currentIndex === index ? 'active' : ''}`}
-              aria-label={`Go to slide ${index + 1}`}
+              aria-label={`Ir a la diapositiva ${index + 1}`}
             />
           ))}
         </div>

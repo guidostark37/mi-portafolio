@@ -24,7 +24,8 @@ export default function Resume(){
 
    return (
      <section id="resume" ref={sectionRef}>
-        <h1 className="heading">Resume</h1>
+        {/* 1. Título de la sección en español */}
+        <h1 className="heading">Trayectoria</h1>
         <div className="divider"></div>
         <p className="parrafo2">
           Resumen detallado de mi formación académica y trayectoria profesional, enfocado en la 
@@ -36,7 +37,8 @@ export default function Resume(){
 
             {/* Columna Izquierda: Resumen y Educación */}
             <div className="resume-cols">
-                <h2>Summary</h2>
+                {/* 2. Subtítulos en español */}
+                <h2>Resumen Profesional</h2>
                 <div className="my-info card-1">
                     <h3>Guido Banquet</h3>
                     <p>
@@ -46,16 +48,16 @@ export default function Resume(){
                     </p>
                     <ul>
                         <li>Fonseca - La Guajira, Colombia</li>
-                        <li>(+57) 300 553 5249</li>
+                        <li>(+57) 300 7727385</li>
                         <li>bguido10@gmail.com</li>
                     </ul>
                 </div>
 
-                <h2>Education</h2>
+                <h2>Educación</h2>
                 <div className="my-edu card-2">
                     <h3>TECNÓLOGO en Análisis y Desarrollo de Sistemas</h3>
-                    <span className="sp-box">2022-2024</span>
-                    <p>Centro Agroempresarial Y Acuicola Sena</p>
+                    <span className="sp-box">2022 - 2024</span>
+                    <p>Centro Agroempresarial y Acuícola - SENA</p>
                     <p>
                       Formación integral enfocada en el ciclo de vida del software, diseño de bases de datos relacionales, 
                       recolección de requerimientos, algoritmia y buenas prácticas de codificación.
@@ -65,11 +67,11 @@ export default function Resume(){
 
             {/* Columna Derecha: Experiencia Profesional */}
             <div className="resume-cols">
-                <h2>Professional Experience</h2>
+                <h2>Experiencia Profesional</h2>
                 
                 <div className="pro-exp card-3"> 
-                    <h3>Desarrollador  (Freelance)</h3>
-                    <span className="sp-box">2024-Presente</span>
+                    <h3>Desarrollador (Freelance)</h3>
+                    <span className="sp-box">2024</span>
                     <ul>
                         <li>Diseño, desarrollo y migración de aplicaciones web utilizando arquitecturas modernas con React.js, Vite y maquetación en Tailwind CSS.</li>
                         <li>Construcción e integración de lógicas backend eficientes y APIs estructuradas empleando frameworks como Laravel.</li>
@@ -79,7 +81,7 @@ export default function Resume(){
 
                 <div className="pro-exp card-4"> 
                     <h3>Especialista en Automatización & VBA</h3>
-                    <span className="sp-box">2024-Presente</span>
+                    <span className="sp-box">2025</span>
                     <ul>
                         <li>Desarrollo de macros complejas en VBA, automatización de eventos dinámicos (`Worksheet_Change`) y diseño de UserForms interactivos.</li>
                         <li>Creación de plantillas de facturación estructuradas, formatos automatizados y sistemas lógicos de validación para control administrativo.</li>

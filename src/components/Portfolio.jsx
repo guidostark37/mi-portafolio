@@ -1,13 +1,13 @@
 import React from "react";
 import { FaExternalLinkAlt } from 'react-icons/fa';
 
-// 1. Centralizamos los datos de tus proyectos para no duplicar código
+// Mantengo exactamente tus mismos nombres de propiedades (image, link) para que no rompa nada
 const proyectos = [
   {
     id: 1,
     title: "Juego de Memoria",
     desc: "Aplicación web interactiva y dinámica desarrollada en React para el estímulo de la agilidad mental.",
-    image: "imagenes/port.png", // Puedes cambiarla por la captura correspondiente luego
+    image: "imagenes/port.png", 
     link: "https://github.com/guidostark37/juego-memoria"
   },
   {
@@ -50,25 +50,32 @@ const proyectos = [
 export default function Portfolio() {
   return (
     <section id="portfolio">
-      <h1 className="heading">Portfolio</h1>
+      {/* 🌟 CAMBIO VISUAL: Título público en español */}
+      <h1 className="heading">Proyectos</h1>
       <div className="divider"></div>
       <p className="parrafo3">
         Una muestra selecta de las aplicaciones, integraciones lógicas y soluciones de software 
         que he desarrollado, abarcando desde entornos frontend interactivos hasta automatizaciones orientadas a procesos.
       </p>
 
+      {/* Se mantienen intactas tus clases CSS originales (port-row, port-item, etc.) */}
       <div className="port-row">
-        {/* 2. Recorremos el arreglo dinámicamente con .map() */}
         {proyectos.map((proyecto) => (
           <div className="port-item" key={proyecto.id}>
             <div className="port-img">
-              <img src={proyecto.image} alt={proyecto.title} width="400" />
+              {/* Añadido lazy loading para optimizar rendimiento en el cel sin tocar tus estilos */}
+              <img src={proyecto.image} alt={proyecto.title} width="400" loading="lazy" />
             </div>
             <div className="port-info">
               <h4>{proyecto.title}</h4>
               <p>{proyecto.desc}</p>
-              <a href={proyecto.link} target="_blank" rel="noopener noreferrer">
-               <FaExternalLinkAlt />
+              <a 
+                href={proyecto.link} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                aria-label={`Ver proyecto: ${proyecto.title}`}
+              >
+                <FaExternalLinkAlt />
               </a>
             </div>
           </div>
